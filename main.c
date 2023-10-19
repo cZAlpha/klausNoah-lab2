@@ -32,7 +32,7 @@ char** get_arguments(int argc, char** argv){
 int main(int argc, char** argv)
 {
     pid_t pid;
-    int status;
+    int status = 1; // Define status as 1 to assume that child process is not finished (0 if it is done)
     char* command = NULL;
     char** command_args = NULL;
     char* ipc_ptr = NULL; // pointer to shared memory
@@ -65,12 +65,12 @@ int main(int argc, char** argv)
         
         // TODO: get the list of arguments to be used in execvp() and execute execvp()
 
-        // Personal TODO: you may have to set status to a certain chosen flag value (prolly like 0 if it is done, 1 if it isn't) of the child process
+        printf("Child Process is Complete \n");
+        status = 0; // Sets the status flag for the child process to 0 to indicate the child process is completed
     }
     else { /* if it is a parent process */
-        // TODO: have parent wait and get status of child.
-        //       Use the variable status to store status of child. 
-        
+        wait(NULL); // Waits for child process, uses NULL as arg because there is only 1 child process 
+
         // TODO: getcurrent_time the current time using gettimeofday
         gettimeofday(&current_time, NULL); // Grabbing current time
         time_t current_time_seconds = current_time.tv_sec; // Grabbing specifically current time in seconds
@@ -79,6 +79,8 @@ int main(int argc, char** argv)
             // This will grab the start time from the child object through the IPC shared memory
         
         // TODO: close IPC
+
+        printf("Parent Process is Complete \n"); 
 
         // NOTE: DO NOT ALTER THE LINE BELOW.
         printf("Elapsed time %.5f\n",elapsed_time(&start_time, &current_time));
