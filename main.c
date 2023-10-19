@@ -46,7 +46,7 @@ int main(int argc, char** argv)
     
     // TODO: call ipc_create to create shared memory region to which parent
     //       child have access.
-    ipc_ptr = ipc_create(5); // unsure as to what I should be passing into the function's argument, I just put a random number "5" there for now
+    ipc_ptr = ipc_create(sizeof(start_time)); // unsure as to what I should be passing into the function's argument, I just put a random number "5" there for now
 
     pid = fork(); /* fork a child process */
 
@@ -79,7 +79,7 @@ int main(int argc, char** argv)
             // This will grab the start time from the child object through the IPC shared memory
         
         // TODO: close IPC
-
+        ipc_close();
         printf("Parent Process is Complete \n"); 
 
         // NOTE: DO NOT ALTER THE LINE BELOW.
