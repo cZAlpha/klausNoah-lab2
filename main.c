@@ -51,11 +51,13 @@ int main(int argc, char** argv)
     }
     else if (pid == 0) { /*child process */
         // TODO: use gettimeofday to log the start time
+        // USE COMMAND "man gettimeofday" to get more information about that. 
+        // BE AWARE: you may need to include the library that is part of in the import section at 
+        //           the top of this file
 
         // TODO: write the time to the IPC
         
-        // TODO: get the list of arguments to be used in execvp() and 
-        // execute execvp()
+        // TODO: get the list of arguments to be used in execvp() and execute execvp()
 
     }
     else { /* parent process */
