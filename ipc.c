@@ -8,7 +8,7 @@
  * 
  *  size - is the size of the memory object to create.
  ***************************************************************/
-char* ipc_create(int size){
+char* ipc_create(int size) {
     int fd; /* shared memory file descriptor */
     char* ptr; /* pointer to shared memory obect */
 
@@ -27,6 +27,6 @@ char* ipc_create(int size){
  * ipc_close - closes the ipc communication channel that was
  *             created with ipc_create.
  **************************************************************/
-void ipc_close(){
+void ipc_close() {
     shm_unlink("lab2");
 }

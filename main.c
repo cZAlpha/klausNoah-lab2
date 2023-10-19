@@ -60,7 +60,7 @@ int main(int argc, char** argv)
         time_t start_time_seconds = start_time.tv_sec; // Grabbing specifically start time in seconds
 
         // TODO: write the time to the IPC
-                // Likely will have to specifically only change pointers and shit instead
+                // Likely will have to specifically only change pointers and stuff instead
                 // of actually referring to the values, due to C being C
         
         // TODO: get the list of arguments to be used in execvp() and execute execvp()
