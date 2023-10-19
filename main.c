@@ -46,32 +46,37 @@ int main(int argc, char** argv)
     
     // TODO: call ipc_create to create shared memory region to which parent
     //       child have access.
+    ipc_ptr = ipc_create(5); // unsure as to what I should be passing into the function's argument, I just put a random number "5" there for now
 
-    /* fork a child process */
-    pid = fork();
+    pid = fork(); /* fork a child process */
 
-    if (pid < 0) { /* error occurred */
+    if (pid < 0) { /* if an error occurred */
         fprintf(stderr, "Fork failed!");
         return 2;
     }
-    else if (pid == 0) { /*child process */
+    else if (pid == 0) { /* if it is a child process */
         // TODO: use gettimeofday to log the start time
-        // USE COMMAND "man gettimeofday" to get more information about that. 
-        // BE AWARE: you may need to include the library that is part of in the import section at 
-        //           the top of this file
+        gettimeofday(&start_time, NULL); // Grabbing start time
+        time_t start_time_seconds = start_time.tv_sec; // Grabbing specifically start time in seconds
 
         // TODO: write the time to the IPC
+                // Likely will have to specifically only change pointers and shit instead
+                // of actually referring to the values, due to C being C
         
         // TODO: get the list of arguments to be used in execvp() and execute execvp()
 
+        // Personal TODO: you may have to set status to a certain chosen flag value (prolly like 0 if it is done, 1 if it isn't) of the child process
     }
-    else { /* parent process */
+    else { /* if it is a parent process */
         // TODO: have parent wait and get status of child.
         //       Use the variable status to store status of child. 
         
-        // TODO: get the current time using gettimeofday
+        // TODO: getcurrent_time the current time using gettimeofday
+        gettimeofday(&current_time, NULL); // Grabbing current time
+        time_t current_time_seconds = current_time.tv_sec; // Grabbing specifically current time in seconds
         
         // TODO: read the start time from IPC
+            // This will grab the start time from the child object through the IPC shared memory
         
         // TODO: close IPC
 

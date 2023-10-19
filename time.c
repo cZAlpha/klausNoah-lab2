@@ -3,13 +3,10 @@
 double elapsed_time(struct timeval* start_time, struct timeval* end_time){
     double elapsed_time; // a double-type variable that holds the amount of time IN SECONDS that has elapsed
     
-    //TODO: return the difference between end_time and start_time.
-
+    // BOTH end_time AND start_time MUST BE IN SECONDS. 
+    // EITHER DO CONVERSION IN APPLICABLE FUNCTION AND FILE,
+    // OR DO IT RIGHT BEFORE THE NEXT LINE THAT USES "difftime" (see below)
+    elapsed_time = difftime(end_time, start_time);
 
     return elapsed_time;
 }
-
-// FOR MAKEFILE:
-// Make .o files out of all applicable .c (and maybe .h) files used in this lab
-// Then concatonate all applicable .o files into an executable file called "time"
-// Unsure if the name of time should be capitalized or not
