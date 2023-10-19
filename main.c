@@ -3,6 +3,7 @@
 #include <sys/time.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "lab2.h"
 
 /************************************************************\
  * get_arguments - returns the command line arguments not
