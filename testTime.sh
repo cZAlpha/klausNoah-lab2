@@ -18,7 +18,7 @@ if [ $? -ne 0 ]; then
     error "make failed!" 
 fi
 
-[ -x time ] || error "EROR: Time not found or not executable."
+[ -x time ] || error "ERROR: Time not found or not executable."
 
 # If everything went fine, cleanup and give exit code 0, signifying everything is coolin'
 cleanup
