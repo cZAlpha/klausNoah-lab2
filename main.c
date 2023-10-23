@@ -46,8 +46,7 @@ int main(int argc, char** argv)
     
     // TODO: call ipc_create to create shared memory region to which parent
     //       child have access.
-    ipc_ptr = ipc_create(sizeof(start_time)); // unsure as to what I should be passing into the function's argument, I just put a random number "5" there for now
-
+    ipc_ptr = ipc_create(sizeof(start_time));
     pid = fork(); /* fork a child process */
 
     if (pid < 0) { /* if an error occurred */

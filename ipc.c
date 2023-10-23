@@ -1,4 +1,10 @@
 // TODO: add the appropriate header files here
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <fcntl.h>
+#include <sys/shm.h>
+#include <sys/stat.h>
 
 
 /**************************************************************
@@ -9,18 +15,27 @@
  *  size - is the size of the memory object to create.
  ***************************************************************/
 char* ipc_create(int size) {
-    int fd; /* shared memory file descriptor */
-    char* ptr; /* pointer to shared memory obect */
+    int shmid;  /* Shared memory ID */
+    char* ptr;  /* Pointer to shared memory object */
+    const char *name = "/lab2";
 
-    // TODO: create the shared memory object called lab2
+    // Create the shared memory object called "lab2"
+    shmid = shmget(ftok(name, 1), size, IPC_CREAT | 0666);
 
-    // TODO: configure the size of the shared memory object 
-        // The size of the shared memory object should be of size "size", see function parameters for applicable variable
+    // Configure the size of the shared memory object
+    // (This step is already included in the shmget function)
 
-    // TODO: memory map the shared memory object */
+    // Memory map the shared memory object
+    // TODO: Memory map the shared memory object here
+    ptr = shmat(shmid, NULL, 0);
+    if (ptr == (char*)-1) {
+        perror("shmat");
+        exit(1);
+    }
 
     return ptr;
 }
+
 
 
 /**************************************************************
