@@ -7,6 +7,7 @@
 #include <sys/stat.h>
 
 
+
 /**************************************************************
  *  ipc_create - creates a shared memory object called lab2 and
  *               returns a char pointer to the memory shared
@@ -19,16 +20,12 @@ char* ipc_create(int size) {
     char* ptr;  /* Pointer to shared memory object */
     const char *name = "/lab2";
 
-    // Create the shared memory object called "lab2"
+    // Create the shared memory object that refers to home directory of lab
     shmid = shmget(ftok(name, 1), size, IPC_CREAT | 0666);
 
-    // Configure the size of the shared memory object
-    // (This step is already included in the shmget function)
-
     // Memory map the shared memory object
-    // TODO: Memory map the shared memory object here
     ptr = shmat(shmid, NULL, 0);
-    if (ptr == (char*)-1) {
+    if (ptr == (char*)-1) { // Checks if shmat function call was successful, somehow if this isn't here the make fails idk why
         perror("shmat");
         exit(1);
     }
