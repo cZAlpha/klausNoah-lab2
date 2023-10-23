@@ -63,6 +63,7 @@ int main(int argc, char** argv)
                 // of actually referring to the values, due to C being C
         
         // TODO: get the list of arguments to be used in execvp() and execute execvp()
+        
 
         printf("Child Process is Complete \n");
         status = 0; // Sets the status flag for the child process to 0 to indicate the child process is completed
@@ -70,14 +71,13 @@ int main(int argc, char** argv)
     else { /* if it is a parent process */
         wait(NULL); // Waits for child process, uses NULL as arg because there is only 1 child process 
 
-        // TODO: getcurrent_time the current time using gettimeofday
         gettimeofday(&current_time, NULL); // Grabbing current time
         time_t current_time_seconds = current_time.tv_sec; // Grabbing specifically current time in seconds
-        
+
         // TODO: read the start time from IPC
-            // This will grab the start time from the child object through the IPC shared memory
-        
-        // TODO: close IPC
+        // This will grab the start time from the child object through the IPC shared memory
+
+
         ipc_close();
         printf("Parent Process is Complete \n"); 
 
