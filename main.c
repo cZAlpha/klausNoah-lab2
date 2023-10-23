@@ -44,41 +44,34 @@ int main(int argc, char** argv)
         return 1;
     }
     
-    // TODO: call ipc_create to create shared memory region to which parent
-    //       child have access.
+    // call ipc_create to create shared memory region to which parent and child have access.
     ipc_ptr = ipc_create(sizeof(start_time));
-    pid = fork(); /* fork a child process */
+    pid = fork(); // fork a child process 
 
-    if (pid < 0) { /* if an error occurred */
+    if (pid < 0) { // if an error occurred 
         fprintf(stderr, "Fork failed!");
         return 2;
     }
-    else if (pid == 0) { /* if it is a child process */
-        // TODO: use gettimeofday to log the start time
+    else if (pid == 0) { // if it is a child process 
         gettimeofday(&start_time, NULL); // Grabbing start time
         time_t start_time_seconds = start_time.tv_sec; // Grabbing specifically start time in seconds
 
-        // TODO: write the time to the IPC
-                // Likely will have to specifically only change pointers and stuff instead
-                // of actually referring to the values, due to C being C
-        
-        // TODO: get the list of arguments to be used in execvp() and execute execvp()
-        
+        ipc_ptr = start_time_seconds; // writes start time in seconds to the char ptr
+ 
+        command_args = get_arguments(argc, argv); // get the list of arguments to be used in execvp() and execute execvp()
+        execvp(command_args[0], command_args); // runs execvp using already initialized variables
 
         printf("Child Process is Complete \n");
         status = 0; // Sets the status flag for the child process to 0 to indicate the child process is completed
     }
-    else { /* if it is a parent process */
+    else { // if it is a parent process 
         wait(NULL); // Waits for child process, uses NULL as arg because there is only 1 child process 
 
         gettimeofday(&current_time, NULL); // Grabbing current time
         time_t current_time_seconds = current_time.tv_sec; // Grabbing specifically current time in seconds
+        time_t start_time_seconds = *((time_t*)ipc_ptr); // reads the start time from IPC
 
-        // TODO: read the start time from IPC
-        // This will grab the start time from the child object through the IPC shared memory
-
-
-        ipc_close();
+        ipc_close(); // Closes shared memory communication
         printf("Parent Process is Complete \n"); 
 
         // NOTE: DO NOT ALTER THE LINE BELOW.
