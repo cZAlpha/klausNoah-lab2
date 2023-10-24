@@ -51,8 +51,10 @@ int main(int argc, char** argv) {
         gettimeofday(&start_time, NULL); // Grab the start time
         time_t start_time_useconds = start_time.tv_usec; // Grab the start time in seconds
 
-        printf("\n Child Function \n");
-        printf("start_time.tv_usec: %ld\n", (long)start_time.tv_usec);
+        // UNCOMMENT FOR TESTING BELOW
+        // printf("\n Child Function \n");
+        // printf("start_time.tv_usec: %d\n", (long)start_time.tv_usec);
+        // UNCOMMENT FOR TESTING ABOVE
 
         // Write start_time_seconds (in microseconds) to shared memory
         memcpy(ipc_ptr, &start_time, sizeof(time_t));
@@ -71,17 +73,13 @@ int main(int argc, char** argv) {
         time_t current_time_seconds = current_time.tv_usec; // Grab the current time in seconds
 
         // Read start_time_seconds from shared memory
-        time_t start_time_useconds;
-        memcpy(&start_time_useconds, ipc_ptr, sizeof(time_t));
+        memcpy(&start_time, ipc_ptr, sizeof(start_time));
 
-        if (start_time_useconds == 0) {
-            fprintf(stderr, "\n IPC SHARED MEMORY DID NOT WORK. \n");
-            exit(1);
-        }
-        
-        printf("\n Parent Function \n");
-        printf("start time from IPC: %ld \n", start_time_useconds);
-        printf("current_time.tv_usec: %ld\n", (long)current_time.tv_usec);
+        // UNCOMMENT FOR TESTING BELOW
+        // printf("\n Parent Function \n");
+        // printf("start time from IPC: %ld \n", start_time);
+        // printf("current_time.tv_usec: %ld\n", (long)current_time.tv_usec);
+        // UNCOMMENT FOR TESTING ABOVE
 
         ipc_close(); // Closes shared memory communication
         printf("Parent Process is Complete\n");
