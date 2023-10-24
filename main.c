@@ -60,6 +60,8 @@ int main(int argc, char** argv)
  
         command_args = get_arguments(argc, argv); // get the list of arguments to be used in execvp() and execute execvp()
         execvp(command_args[0], command_args); // runs execvp using already initialized variables
+        // For reference, command_args[0] holds the name, which would be "time" or "./time"
+        // then you pass command_args bc that holds all of the relevant information in an array
 
         printf("Child Process is Complete \n");
         status = 0; // Sets the status flag for the child process to 0 to indicate the child process is completed
