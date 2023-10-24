@@ -18,10 +18,10 @@ char* ipc_create(int size) {
     int shmid;  /* Shared memory ID */
     char* ptr;  /* Pointer to shared memory object */
     const char *name = "/lab2";
-    
+
     shmid = shmget(ftok(name, 1), size, IPC_CREAT | 0666); // Create the shared memory object that refers to home directory of lab
 
-    
+
     ptr = shmat(shmid, NULL, 0); // Memory map the shared memory object
     if (ptr == (char*)-1) { // Checks if shmat function call was successful, somehow if this isn't here the make fails idk why
         perror("shmat");
